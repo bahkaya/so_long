@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:40:10 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/06 19:34:30 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/06 20:40:42 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ pixel kullanman yasak uğraşma geç
 
 */
 
-#include "solong.h"
+#include "so_long.h"
 
 int	key_handler(t_stack **data)
 {
@@ -66,17 +66,16 @@ int main()
 {
 	t_stack *data;
 
-	data = NULL;
-	data = malloc(sizeof(t_stack));
+	
 	data->height = 32;
 	data->width = 32;
 	data->mlx = mlx_init();
 	data->window = mlx_new_window(data->mlx, 1280, 640, "so_long");
-	data->img_w = mlx_xpm_file_to_image(data->mlx, "./Wall.xpm", &data->width, &data->height);
-	data->img_e = mlx_xpm_file_to_image(data->mlx, "./Exit.xpm", &data->width, &data->height);
-	data->img_p = mlx_xpm_file_to_image(data->mlx, "./Player.xpm", &data->width, &data->height);
-	data->img_f = mlx_xpm_file_to_image(data->mlx, "./Floor.xpm", &data->width, &data->height);
-	data->img_c = mlx_xpm_file_to_image(data->mlx, "./Coin.xpm", &data->width, &data->height);
+	data->img_w = mlx_xpm_file_to_image(data->mlx, "./assets/Wall.xpm", &data->width, &data->height);
+	data->img_e = mlx_xpm_file_to_image(data->mlx, "./assets/Exit.xpm", &data->width, &data->height);
+	data->img_p = mlx_xpm_file_to_image(data->mlx, "./assets/Player.xpm", &data->width, &data->height);
+	data->img_f = mlx_xpm_file_to_image(data->mlx, "./assets/Floor.xpm", &data->width, &data->height);
+	data->img_c = mlx_xpm_file_to_image(data->mlx, "./assets/Coin.xpm", &data->width, &data->height);
 
 	mlx_hook(data->window, 2, 1L>> 0, key_handler, &data);
 	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 0*128);
