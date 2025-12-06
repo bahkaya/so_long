@@ -16,6 +16,7 @@ SRCS_GET_NEXT_LINE =	\
 
 SRCS = \
 	so_long.c \
+	ft_check_map.c
 
 OBJS = $(SRCS:.c=.o) 
 OBJS_GET_NEXT_LINE = $(SRCS_GET_NEXT_LINE:.c=.o)
@@ -23,7 +24,7 @@ OBJS_GET_NEXT_LINE = $(SRCS_GET_NEXT_LINE:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJS_GET_NEXT_LINE) $(LIBFT) $(PRINTF) $(MLX_LIB)
-	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_GET_NEXT_LINE) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(OBJS_GET_NEXT_LINE) $(PRINTF) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):
 	@make -C ./libft

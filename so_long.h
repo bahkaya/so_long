@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solong.h                                           :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 18:22:41 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/06 20:40:32 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/06 21:00:30 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,19 @@
 
 # include "minilibx-linux/mlx.h"
 # include <stdlib.h>
+# include <errno.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 # include "./printf/ft_printf.h"
+
+typedef struct s_map
+{
+	char	**whole_map;
+	char	*line_map;
+	char	**ber_file;
+	int		i;
+	int		k;
+}	t_map;
 
 typedef struct s_stack
 {
@@ -34,19 +44,8 @@ typedef struct s_stack
 	int		key_code;
 }	t_stack;
 
-typedef struct s_map
-{
-	char	**whole_map;
-	char	*line_map;
-	int		wall_fd;
-	int		player_fd;
-	int		coin_fd;
-	int		exit_fd;
-	int		floor_fd;
-	int		i;
-	int		k;
-}	t_map;
 
-int	key_handler(t_stack **data);
+void	ft_check_map(t_stack data);
+int		key_handler(int key_code, t_stack *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:40:10 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/06 20:40:42 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/06 20:56:38 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,42 @@ pixel kullanman yasak uğraşma geç
 
 #include "so_long.h"
 
-int	key_handler(t_stack **data)
+int	key_handler(int key_code, t_stack *data)
 {
-	if ((*data)->key_code == 65307)
+	data = (void *)data;
+	if (key_code == 65307)
 	{
 		exit (0);
 	}
 	return 0;
 }
 
-int main()
+int main(int ac, char **av)
 {
-	t_stack *data;
+	t_stack data;
 
-	
-	data->height = 32;
-	data->width = 32;
-	data->mlx = mlx_init();
-	data->window = mlx_new_window(data->mlx, 1280, 640, "so_long");
-	data->img_w = mlx_xpm_file_to_image(data->mlx, "./assets/Wall.xpm", &data->width, &data->height);
-	data->img_e = mlx_xpm_file_to_image(data->mlx, "./assets/Exit.xpm", &data->width, &data->height);
-	data->img_p = mlx_xpm_file_to_image(data->mlx, "./assets/Player.xpm", &data->width, &data->height);
-	data->img_f = mlx_xpm_file_to_image(data->mlx, "./assets/Floor.xpm", &data->width, &data->height);
-	data->img_c = mlx_xpm_file_to_image(data->mlx, "./assets/Coin.xpm", &data->width, &data->height);
-
-	mlx_hook(data->window, 2, 1L>> 0, key_handler, &data);
-	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 0*128);
-	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 1*128);
-	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 2*128);
-	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 3*128);
-	mlx_put_image_to_window(data->mlx, data->window, data->img_w, 0* 128 , 4*128);
-	mlx_loop(data->mlx);
+	if(ac == 2)
+	{
+		data.map.ber_file = av;
+		ft_check_map(data);
+		data.height = 32;
+		data.width = 32;
+		data.mlx = mlx_init();
+		data.window = mlx_new_window(data.mlx, 1280, 640, "so_long");
+		data.img_w = mlx_xpm_file_to_image(data.mlx, "./assets/Wall.xpm", &data.width, &data.height);
+		data.img_e = mlx_xpm_file_to_image(data.mlx, "./assets/Exit.xpm", &data.width, &data.height);
+		data.img_p = mlx_xpm_file_to_image(data.mlx, "./assets/Player.xpm", &data.width, &data.height);
+		data.img_f = mlx_xpm_file_to_image(data.mlx, "./assets/Floor.xpm", &data.width, &data.height);
+		data.img_c = mlx_xpm_file_to_image(data.mlx, "./assets/Coin.xpm", &data.width, &data.height);
+		ft_printf("eajd\n");
+		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 0*128);
+		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 1*128);
+		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 2*128);
+		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 3*128);
+		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 4*128);
+		ft_printf("asdkl\n");
+		mlx_hook(data.window, 2, 1L>> 0, key_handler, &data);
+		ft_printf("dkal\n");
+		mlx_loop(data.mlx);
+	}
 }
