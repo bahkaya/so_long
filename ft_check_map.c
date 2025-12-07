@@ -6,22 +6,93 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 19:46:44 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/06 21:03:34 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/07 23:24:35 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	ft_free(char **str_is_digit)
+{
+	int	i;
+
+	i = 0;
+	while (str_is_digit[i] != NULL)
+	{
+		free(str_is_digit[i]);
+		i++;
+	}
+	free(str_is_digit);
+}
+
 void	ft_check_files(t_map map)
 {
-	if(ft_strnstr(map.ber_file[1], ".ber", 4))
+	size_t	len;
+
+	len = ft_strlen(map.ber_file_check[1]);
+	if (len < 4 || ft_strncmp(map.ber_file_check[1] + len - 4, ".ber", 4) != 0)
 	{
-		ft_printf("HATA\n");
+		ft_printf("Error:\nInvalid file extension\n");
+		exit(EXIT_FAILURE);
+	}
+}
+void	ft_check_map_suitable(t_map map)
+{
+	char	*ber_file_location;
+
+	ber_file_location = ft_strjoin("./map", map.ber_file_check);
+	map.ber_file_fd = open(ber_file_location, O_RDONLY, 0644);
+	if (!map.ber_file_fd || map.ber_file_fd != 3)
+	{
+		free(ber_file_location);
+		//error message
 		exit(-1);
 	}
 }
+
+t_link	*ft_put_map_on_stack(t_map map)
+{
+	t_link	*whole_map;
+	t_link	*temp;
+
+	whole_map = NULL;
+	temp = NULL;
+	map.line_map = get_next_line(map.ber_file_fd);
+	map.file_x_len = ft_strlen(map.line_map);
+	map.file_x_len = 0;
+	if(!map.line_map)
+		exit(-1); // Plus the error message
+	while (map.line_map != NULL)
+	{
+		whole_map = ft_link_malloc_a(map.line_map);
+		if (!whole_map)
+			ft_error_return_stack(map.line_map, whole_map);
+		whole_map->next = temp;
+		temp = whole_map;
+		free(map.line_map);
+		get_next_line(map.ber_file_fd);
+		map.file_y_len++;
+	}
+	return (whole_map);
+}
+void	ft_check_map_correctness(t_link *map, t_map map_info)
+{
+	t_link *tmp;
+
+	tmp = map;
+	while (tmp != NULL)
+	{
+		
+	}
+	
+}
 void	ft_check_map(t_stack data)
 {
+	t_link	*map;
+	
+	map = NULL;
 	ft_check_files(data.map);
-		
+	ft_check_map_suitable(data.map);
+	map = ft_put_map_on_stack(data.map);
+	ft_check_map_correctness(map, data.map);
 }

@@ -6,13 +6,13 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 14:49:09 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/07/15 14:42:00 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:07:53 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putnbr_len(unsigned int n)
+static int	ft_putnbr_len(int n)
 {
 	size_t	len;
 

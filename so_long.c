@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:40:10 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/06 20:56:38 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/07 14:44:59 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int main(int ac, char **av)
 
 	if(ac == 2)
 	{
-		data.map.ber_file = av;
+		data.map.ber_file_check = av;
 		ft_check_map(data);
 		data.height = 32;
 		data.width = 32;
@@ -80,15 +80,12 @@ int main(int ac, char **av)
 		data.img_p = mlx_xpm_file_to_image(data.mlx, "./assets/Player.xpm", &data.width, &data.height);
 		data.img_f = mlx_xpm_file_to_image(data.mlx, "./assets/Floor.xpm", &data.width, &data.height);
 		data.img_c = mlx_xpm_file_to_image(data.mlx, "./assets/Coin.xpm", &data.width, &data.height);
-		ft_printf("eajd\n");
 		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 0*128);
 		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 1*128);
 		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 2*128);
 		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 3*128);
 		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 4*128);
-		ft_printf("asdkl\n");
 		mlx_hook(data.window, 2, 1L>> 0, key_handler, &data);
-		ft_printf("dkal\n");
 		mlx_loop(data.mlx);
 	}
 }
