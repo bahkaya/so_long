@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 18:22:41 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/07 22:40:45 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/08 21:22:23 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_link
 void	ft_check_map(t_stack data);
 int		key_handler(int key_code, t_stack *data);
 t_link	*ft_link_malloc_a(char *line);
-void	ft_error_return_stack(char *arr_digit, t_stack *head);
+void	ft_error_return_link(char *arr_digit, t_stack *head);
+int		ft_stack_size(t_link *a);
+void	free_stack(t_link *a);
 
 #endif

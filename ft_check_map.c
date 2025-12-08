@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 19:46:44 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/07 23:24:35 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/08 21:23:13 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ void	ft_check_map_suitable(t_map map)
 	if (!map.ber_file_fd || map.ber_file_fd != 3)
 	{
 		free(ber_file_location);
+		close(ber_file_location);
 		//error message
 		exit(-1);
 	}
 }
 
-t_link	*ft_put_map_on_stack(t_map map)
+t_link	*ft_put_map_on_link(t_map map)
 {
 	t_link	*whole_map;
 	t_link	*temp;
@@ -73,19 +74,32 @@ t_link	*ft_put_map_on_stack(t_map map)
 		get_next_line(map.ber_file_fd);
 		map.file_y_len++;
 	}
+	close(map.ber_file_fd);
 	return (whole_map);
 }
-void	ft_check_map_correctness(t_link *map, t_map map_info)
+
+t_map	ft_put_map_on_map(t_link *map, t_map map_info)
 {
 	t_link *tmp;
+	int		i;
 
+	i = 0;
 	tmp = map;
 	while (tmp != NULL)
 	{
-		
+		map_info.file_y_len = ft_stack_size(map);
+		map_info.whole_map = malloc(sizeof(char *) * map_info.file_x_len + 1);
+		if(!map_info.whole_map)
+			exit(-1); // plus the error message
+		map_info.whole_map[i] = ft_strdup(map->line);
+		i++;
+		map = map->next;
 	}
-	
+	map_info.whole_map[i] = NULL;
+	free_stack(map);
+	return (map_info);
 }
+
 void	ft_check_map(t_stack data)
 {
 	t_link	*map;
@@ -93,6 +107,7 @@ void	ft_check_map(t_stack data)
 	map = NULL;
 	ft_check_files(data.map);
 	ft_check_map_suitable(data.map);
-	map = ft_put_map_on_stack(data.map);
-	ft_check_map_correctness(map, data.map);
+	map = ft_put_map_on_link(data.map);
+	data.map = ft_put_map_on_map(map, data.map);
+	
 }
