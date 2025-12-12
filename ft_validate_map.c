@@ -16,8 +16,8 @@ void	ft_map_rectangle_check(t_map map)
 {
 	int	i;
 
-	map.file_x_len = ft_strlen(map.whole_map[i]);
 	i = 0;
+	map.file_x_len = ft_strlen(map.whole_map[i]);
 	while (map.whole_map[i] != NULL)
 		i++;
 	map.file_y_len = i;
