@@ -26,7 +26,7 @@ void	ft_free(char **str_is_digit)
 }
 
 void	ft_check_files(t_map map)
-{
+{//bura sıkıntı aga
 	size_t	len;
 
 	len = ft_strlen(map.ber_file_check[1]);
