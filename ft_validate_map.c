@@ -49,17 +49,8 @@ int	ft_check_middle_walls(char *wall)
 
 	len = ft_strlen(wall);
 	i = 0;
-	while (wall[i] != "\0")
-	{
-		if (i == 0 || i == len - 1)
-		{
-			if(wall[i] != 1 || wall[len - 1] != 1)
-				return (1);
-			else
-				i++;
-		}
-		i++;
-	}
+	if(wall[i] != 1 || wall[len - 1] != 1)
+		return (1);
 	return (0);
 }
 void	ft_map_walls_check(t_map map)
