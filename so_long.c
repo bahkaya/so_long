@@ -6,86 +6,57 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:40:10 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/07 14:44:59 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/14 22:51:18 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-//TODO:
-https://harm-smits.github.io/42docs/libs/minilibx
-
-mlx init
-mlx_new_window
-mlx_destroy_window
-mlx_put_image_to_window
-mlx_destroy_wiimage //emin değilim bi bak
-mlx_key_hook
-mlx_loop
-mlx_xpm_to_image
-
-Bu case e dikkat ya exit ın üzerinden geçicek yada map invalid olacak.
-11111
-1PEC1
-11111
-
-
-Dosya uzantısını kontrol etmek olmalı.
-x.ber
-
-The map must be rectangular.
-
- At every move, the current number of movements must be displayed in the shell.
-
- collactable ın üzerineyken collatable değişkenini 1 azaltman lazım ve orayı 0 yapman lazım
- yani zemin görseli ile değiştrmen lazım
- 
- Map ekran boyutundan büyükse oyunu açma direkt hata döndür ve çık.
-
- flood_fill algortimasını öğrenmen lazım ve bununla mapini kontol etmen lazım.
- 
-  If any misconfiguration is encountered in the file, the program must exit cleanly,
-and return "Error\n" followed by an explicit error message of your choice.
-Altına hata mesajın
-
-pixel kullanman yasak uğraşma geç
-
-*/
 
 #include "so_long.h"
 
 int	key_handler(int key_code, t_stack *data)
 {
-	data = (void *)data;
 	if (key_code == 65307)
 	{
+		ft_free(data->map.whole_map);
+		destroy_image(data);
 		exit (0);
 	}
-	return 0;
+	if (key_code == 119)
+	{
+		ft_move_up(data);
+	}
+	if (key_code == 97)
+	{
+		ft_move_left(data);
+	}
+	if (key_code == 115)
+	{
+		ft_move_down(data);
+	}
+	if (key_code == 100)
+	{
+		ft_move_right(data);
+	}
+	return (0);
 }
 
-int main(int ac, char **av)
+// makefileda -g var ona dikkat et en son sil!
+int	main(int ac, char **av)
 {
-	t_stack data;
+	t_stack	data;
 
-	if(ac == 2)
+	if (ac == 2)
 	{
 		data.map.ber_file_check = av;
-		ft_check_map(data);
-		data.height = 32;
-		data.width = 32;
-		data.mlx = mlx_init();
-		data.window = mlx_new_window(data.mlx, 1280, 640, "so_long");
-		data.img_w = mlx_xpm_file_to_image(data.mlx, "./assets/Wall.xpm", &data.width, &data.height);
-		data.img_e = mlx_xpm_file_to_image(data.mlx, "./assets/Exit.xpm", &data.width, &data.height);
-		data.img_p = mlx_xpm_file_to_image(data.mlx, "./assets/Player.xpm", &data.width, &data.height);
-		data.img_f = mlx_xpm_file_to_image(data.mlx, "./assets/Floor.xpm", &data.width, &data.height);
-		data.img_c = mlx_xpm_file_to_image(data.mlx, "./assets/Coin.xpm", &data.width, &data.height);
-		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 0*128);
-		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 1*128);
-		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 2*128);
-		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 3*128);
-		mlx_put_image_to_window(data.mlx, data.window, data.img_w, 0* 128 , 4*128);
-		mlx_hook(data.window, 2, 1L>> 0, key_handler, &data);
+		ft_check_map(&data);
+		data.height = 128;
+		data.width = 128;
+		data.pressed = 0;
+		ft_find_player(&data);
+		ft_find_coin(&data);
+		ft_window_start(&data);
+		ft_put_assests_on_map(&data);
+		mlx_hook(data.window, 2, 1L >> 0, key_handler, &data);
+		mlx_hook(data.window, 17, 0, exit_button, &data);
 		mlx_loop(data.mlx);
 	}
 }

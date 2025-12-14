@@ -6,7 +6,7 @@
 #    By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/26 16:24:29 by bahkaya           #+#    #+#              #
-#    Updated: 2025/06/23 11:22:56 by bahkaya          ###   ########.fr        #
+#    Updated: 2025/12/14 13:47:56 by bahkaya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,13 +55,13 @@ OBJECTS = $(SOURCE:.c=.o)
 
 all: $(NAME)
 $(NAME): $(OBJECTS)
-	ar rcs -o $(NAME) $(OBJECTS)
+	@ar rcs -o $(NAME) $(OBJECTS)
 
 clean:
-	rm -rf $(OBJECTS)
+	@rm -rf $(OBJECTS)
 
 fclean:	clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 
 re: fclean all

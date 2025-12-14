@@ -14,9 +14,18 @@ SRCS_GET_NEXT_LINE =	\
 ./get_next_line/get_next_line_utils.c
 
 
-SRCS = \
-	so_long.c \
-	ft_check_map.c
+SRCS = 					\
+	so_long.c			\
+	ft_check_map.c		\
+	t_link_functions.c	\
+	error_exit.c		\
+	ft_validate_map.c	\
+	mlx_functions.c		\
+	events.c			\
+	find_everything.c	\
+	game_exit.c			\
+	flood_fill.c		\
+	last_control.c
 
 OBJS = $(SRCS:.c=.o) 
 OBJS_GET_NEXT_LINE = $(SRCS_GET_NEXT_LINE:.c=.o)
@@ -35,7 +44,7 @@ $(MLX_LIB):
 	@make -s -C $(MLX_DIR)
 
 %.o: %.c 
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -g
 
 clean:
 	@rm -f $(LIBFT)
@@ -47,9 +56,9 @@ clean:
 	
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C ./libft
-	make fclean -C ./printf
+	@rm -f $(NAME)
+	@make fclean -C ./libft
+	@make fclean -C ./printf
 
 re: fclean all
 
