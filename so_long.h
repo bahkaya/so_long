@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 18:22:41 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/14 22:32:23 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/14 23:03:47 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	ft_flood_exit(char **map_copy, t_stack *data);
 int		ft_check_first_last_wall(char *wall);
 void	ft_map_rectangle_check(t_map *map);
 void	put_image(t_stack *data, int i, int width, int height);
+void	check_screen_size(t_stack *data);
 #endif
