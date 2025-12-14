@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 15:04:03 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/12/14 23:04:21 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/12/14 23:24:51 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_window_start(t_stack *data)
 		exit(-1);
 	width = data->map.file_x_len * data->height;
 	height = data->map.file_y_len * data->height;
-	check_screen_size(data);
 	data->window = mlx_new_window(data->mlx, width, height, "so_long");
 	data->img_w = mlx_xpm_file_to_image(data->mlx, "./assets/Wall.xpm",
 			&data->width, &data->height);
@@ -52,6 +51,7 @@ void	ft_put_assests_on_map(t_stack *data)
 		put_image(data, i, width, height);
 		i++;
 	}
+	check_screen_size(data);
 }
 
 void	destroy_image(t_stack *data)
@@ -81,13 +81,15 @@ int	exit_button(t_stack *data)
 	destroy_image(data);
 	exit(0);
 }
+
 void	check_screen_size(t_stack *data)
 {
 	int	height;
 	int	width;
 
 	mlx_get_screen_size(data->mlx, &width, &height);
-	if (width < data->width || height < data->height)
+	if (width < (data->width * data->map.file_x_len)
+		|| height < (data->height * data->map.file_x_len))
 	{
 		ft_printf("Screen is big\n");
 		ft_free(data->map.whole_map);
